@@ -9,13 +9,13 @@ export default defineConfig({
     hmr: true,
     port: 8090,
     proxy: {
-      '/admin': {
+      '/api': {
         target: "http://localhost:8084/",
         secure: false,
         changeOrigin: true,
-        // pathRewrite: {
-        //   '^/': '/'
-        // }
+        pathRewrite: {
+          '^/api': '/'
+        }
       },
     }
   },
