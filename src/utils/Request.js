@@ -4,9 +4,10 @@ import { ElLoading, ElMessage } from "element-plus";
 const contentTypeForm = "application/x-www-form-urlencoded;charset=UTF-8";
 const contentTypeJson = "application/json";
 const contentTypeFile = "multipart/form-data";
+const baseURL = "http://localhost:8084/";
 
 const request = (config) => {
-  const { url, params, dataType = "form", showLoading = true } = config;
+  let { url, params, dataType = "form", showLoading = true } = config;
 
   let contentType = contentTypeForm;
   if (dataType === "json") {
@@ -21,7 +22,7 @@ const request = (config) => {
   }
 
   const instance = axios.create({
-    baseURL: "/api",
+    baseURL: baseURL,
     timeout: 30 * 1000,
     headers: {
       "Content-Type": contentType,
@@ -70,27 +71,24 @@ const request = (config) => {
     }
   );
 
-  /*   return instance.post(url,params).catch(
-    error =>{
-      ElMessage({
-        message: 'error',
-        type: 'error',
-      })
-      return null;
-    }
-  ) */
+  // return instance.post(url,params).catch(
+  //   error =>{
+  //     ElMessage({
+  //       message: error,
+  //       type: 'error',
+  //     })
+  //     return null;
+  //   }
+  // ) 
   let result = new Promise((resolve, reject) => {
-    instance
-      .post(url, params)
-      .then((res) => {
-        resolve(res);
-      })
-      .catch((error) => {
-        ElMessage({
-          message: error,
-          type: "error",
-        });
+    instance.post(url, params).then((res) => {
+      resolve(res);
+    }).catch((error) => {
+      ElMessage({
+        message: error,
+        type: "error"
       });
+    });
   });
   return result;
 };

@@ -8,16 +8,16 @@ export default defineConfig({
   server: {
     hmr: true,
     port: 8090,
-    proxy: {
-      '/api': {
-        target: "http://localhost:8084/",
-        secure: false,
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api': '/'
-        }
-      },
-    }
+    // proxy: {
+    //   '/api': {
+    //     target: "http://localhost:8084/",
+    //     secure: false,
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '^/api': '/'
+    //     }
+    //   },
+    // }
   },
   resolve: {
     //配置路径别名
